@@ -6,9 +6,14 @@
 
         {% endblock head_title %}
     </title>
+  <link rel="stylesheet" href="{% {% static ' css/bootstrap.min.css' %}">
+  
+
 
 </head>
 <body>
+
+<h1>Hello</h1>
 
 {% imclude 'messages.html' %}
 
@@ -16,5 +21,11 @@
 
 
   {% endblock content %}
+
+
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}" ></script>
+  <script src="{% static 'js/bootstrap.min.js' %}" ></script>
+
+
 </body>
 </html>
