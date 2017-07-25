@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>List</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+
+{% block head_title %}List{% endblock head_title %}
+
+{% block content %}
+
 <ol>
-{% for instance in post_list%}
-	<a href="/posts/detail/{{instance.id}}"><li>li{{instance.title}}</li></a>
+
+{% for x in post_list%}
+	<a href="{{x.get_absolute_url}}"><li>li{{x.title}}</li></a>
+	<li>{{x}}</li>
 {% endfor %}
 </ol>
 
-</body>
-</html>
+
+{% endblock content %}
+
+
