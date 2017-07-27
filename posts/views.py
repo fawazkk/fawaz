@@ -4,9 +4,11 @@ from .models import Post
 from .forms import PostForm
 from django.contrib import messages
 def post_list(request):
-	obj_list = Post.objects.all()
+	obj_list = Post.objects.all().order_by("-timestamp","-updated")
 	context = {
 		"post_list": obj_list,
+		"title": "List",
+		"user": request.user
 	}
 	return render(request, 'post_list.html', context)
 	

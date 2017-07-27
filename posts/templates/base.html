@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html> 
 <head>
     <title>
@@ -6,21 +7,22 @@
 
         {% endblock head_title %}
     </title>
-  <link rel="stylesheet" href="{% {% static ' css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   
-
-
 </head>
 <body>
 
-<h1>Hello</h1>
-
-{% imclude 'messages.html' %}
-
-	{% block content %}
+{% include 'messages.html' %}
 
 
-  {% endblock content %}
+<div class="conatainer">
+{% block content %}
+
+
+{% endblock content%}
+</div>
+
+	
 
 
   <script src="{% static 'js/jquery-3.2.1.min.js' %}" ></script>
