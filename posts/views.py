@@ -30,8 +30,8 @@ def post_list(request):
 	}
 	return render(request, 'post_list.html', context)
 	
-def post_detail(request, post_id):
-	obj = get_object_or_404(Post, id=post_id)
+def post_detail(request, post_slug):
+	obj = get_object_or_404(Post, slug=post_slug)
 	context = {
 		"instance": obj,
 		"share_string": quote(obj.content)
@@ -48,28 +48,29 @@ def post_create(request):
 		messages.success(request, "OMG! So cool! you created an object.")
 		return redirect("posts:list")
 	context = {
-    "title": "Create",
-    "form": form,
+	"title": "Create",
+	"form": form,
 
 	}
 	return render(request, 'post_create.html', context)
 
 
-def post_update(request, post_id):
-	  form = PostForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Successfully updated!")
-        return redirect("posts:list")
-    context = {
-    "title": "Update",
-    "form": form,
+def post_update(request,slug=post_slug):
+	instance = get_object_or_404(Post, slug=post_slug)
+	form = PostForm(request.POST or None, request.FILES or None, instance = instance)
+	if form.is_valid():
+		form.save()
+		messages.success(request, "Successfully updated!")
+		return redirect("posts:list")
+	context = {
+	"title": "Update",
+	"form": form,
 	}
 	return render(request, 'post_update.html', context)
 
 
-def post_delete(request, post_id):
-	obj=Post.objects.get(id=post_id).delete()
+def post_delete(request, post_slug):
+	obj=Post.objects.get(slug=post_slug).delete()
 	messages.warning(request, "Steve Jobs says hi!")
 	return redirect("posts:list")
 

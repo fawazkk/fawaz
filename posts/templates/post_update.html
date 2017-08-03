@@ -4,9 +4,9 @@
 
 
 
-	<form method="POST" action="{% url 'posts:update' post_id=post_object.id %}">
-		{% csrf_token %}
-		{{form.as_p}}
-		<input type="submit" value="Create Post">
+	<form action="{% url 'posts:update' post_slug=instance.slug %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Update Post">
 </form>
 {% endblock content %}
