@@ -41,28 +41,29 @@ def post_detail(request, post_id):
 
 
 def post_create(request):
-	form = PostForm(request.POST or None)
+	form = PostForm(request.POST or None,request.FILES or None)
+ 
 	if form.is_valid():
 		form.save()
 		messages.success(request, "OMG! So cool! you created an object.")
 		return redirect("posts:list")
 	context = {
-		"form":form,
+    "title": "Create",
+    "form": form,
 
 	}
 	return render(request, 'post_create.html', context)
 
 
 def post_update(request, post_id):
-	post_object = get_object_or_404(Post, id=post_id)
-	form = PostForm(request.POST or None, instance=post_object)
-	if form.is_valid():
-		form.save()
-		messages.success(request, "hala shlonik?")
-		return redirect("posts:list")
-	context = {
-		"form":form,
-		"post_object":post_object,
+	  form = PostForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Successfully updated!")
+        return redirect("posts:list")
+    context = {
+    "title": "Update",
+    "form": form,
 	}
 	return render(request, 'post_update.html', context)
 

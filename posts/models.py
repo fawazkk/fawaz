@@ -6,7 +6,9 @@ class Post(models.Model):
 	content = models.TextField()
 	updated = models.DateField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
+	image = models.ImageField(null=True, blank=True, upload_to="post_images")
 
+	
 	def __str__(self):
 		return self.title
 
