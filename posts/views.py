@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from urllib.parse import quote
 def post_list(request):
 	obj_list = Post.objects.all().order_by("-timestamp","-updated")
 	context = {
@@ -16,6 +17,7 @@ def post_detail(request, post_id):
 	obj = get_object_or_404(Post, id=post_id)
 	context = {
 		"instance": obj,
+		"share_string": quote(obj.content)
 		}
 
 	return render (request, 'post_detail.html', context)

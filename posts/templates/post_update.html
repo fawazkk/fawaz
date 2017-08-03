@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html> 
-<head>
-   <style>
-   body {
-   	background-color: grey;
-    
-   }
-   </style>
-    <title>Update</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
 	<form method="POST" action="{% url 'posts:update' post_id=post_object.id %}">
 		{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="Create Post">
-</body>
-</html>
+</form>
+{% endblock content %}

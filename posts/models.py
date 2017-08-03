@@ -14,5 +14,5 @@ class Post(models.Model):
 		return reverse("posts:detail", kwargs={"post_id": self.id})
 
 
-
-
+	class Meta:
+		ordering = ["timestamp", "-updated"]

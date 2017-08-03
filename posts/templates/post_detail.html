@@ -1,18 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>List</title>
-</head>
-<body>
-	<ol>
-	<li>{{instance.id}}</li>
-	<li>{{instance.title}}</li>
-	<li>{{instance.content}}</li>
+{% extends "base.html" %}
+{% load urlify %}
 
 
-</ol>
 
 
-<a href="{% url 'posts:list' %}">Go back to list</a>
-</body>
-</html>
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        {% if instance.image %}
+            <img src="{{instance.image.url}}" alt="" class="img-responsive">
+        {% endif %}
+        <h1>{{instance.title}} <small>{{instance.timestamp}}</small></h1>
+        {{instance.content| linebreaks}}
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+        Share on Facebook
+        </a>
+
+        <br>
+        <a href="https://twitter.com/home?status={{share_string}}%20{{request.build_absolute_uri}}">
+Share on Twitter
+</a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
+        Share on Linkedin
+        </a>
+
+    </div>
+</div>
+{% endblock content %}
