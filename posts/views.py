@@ -6,7 +6,7 @@ from django.contrib import messages
 from urllib.parse import quote
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.http import Http404
 
 def post_list(request):
 	obj_list = Post.objects.all().order_by("-timestamp","-updated")
@@ -41,6 +41,9 @@ def post_detail(request, post_slug):
 
 
 def post_create(request):
+	if not (request.user.is_staff or request.user.is_superuser):
+		raise Http404
+
 	form = PostForm(request.POST or None,request.FILES or None)
  
 	if form.is_valid():
@@ -55,7 +58,10 @@ def post_create(request):
 	return render(request, 'post_create.html', context)
 
 
-def post_update(request,slug=post_slug):
+def post_update(request,post_slug):
+	if not (request.user.is_staff or request.user.is_superuser):
+		raise Http404
+
 	instance = get_object_or_404(Post, slug=post_slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance = instance)
 	if form.is_valid():
@@ -65,11 +71,15 @@ def post_update(request,slug=post_slug):
 	context = {
 	"title": "Update",
 	"form": form,
+	"instance":instance,
 	}
 	return render(request, 'post_update.html', context)
 
 
 def post_delete(request, post_slug):
+	if not (request.user.is_staff or request.user.is_superuser):
+		raise Http404
+
 	obj=Post.objects.get(slug=post_slug).delete()
 	messages.warning(request, "Steve Jobs says hi!")
 	return redirect("posts:list")
