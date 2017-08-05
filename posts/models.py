@@ -10,7 +10,7 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(null=True, blank=True, upload_to="post_images")
     slug = models.SlugField(unique=True)
-
+    author = models.ForeignKey(User, default=1)
     def __str__(self):
         return self.title
 

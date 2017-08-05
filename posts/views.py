@@ -47,8 +47,10 @@ def post_create(request):
 	form = PostForm(request.POST or None,request.FILES or None)
  
 	if form.is_valid():
-		form.save()
-		messages.success(request, "OMG! So cool! you created an object.")
+		post = form.save(commit = False)
+        post.author = request.user
+        post.save()
+        messages.success(request, "Successfully Created!")
 		return redirect("posts:list")
 	context = {
 	"title": "Create",
