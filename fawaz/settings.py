@@ -25,7 +25,8 @@ SECRET_KEY = '4$$4fcy-j!d8x$l805phrsl)8#s4)1!(3$t%0j7x^e%h-o1j66'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['188.166.212.112']
+
+ALLOWED_HOSTS = ['188.166.212.112', '127.0.0.1']
 
 
 # Application definition
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'posts',
     'crispy_forms',
+    'rest_framework',
+    'api',
+
 
 ]
 SITE_ID = 1
@@ -77,23 +81,23 @@ WSGI_APPLICATION = 'fawaz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': '56d2b4fdfd5785949492f757328f3c67',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django',
+#         'USER': 'django',
+#         'PASSWORD': '56d2b4fdfd5785949492f757328f3c67',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
